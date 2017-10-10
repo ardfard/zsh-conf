@@ -171,5 +171,5 @@ function kafti(){
   pod=`kfp $1 | awk '{print $1}' | head -n 1`
   kati $pod
 }
-
+alias prettyjson='python -m json.tool'
 source ~/.platform_spesific.zsh
