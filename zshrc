@@ -45,7 +45,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ruby rails)
+plugins=(git git-extras sublime ruby rails kubernetes docker)
 
 # User configuration
 
@@ -160,9 +160,25 @@ export EDITOR=vim
 #kubectl completion zsh
 export PATH="/usr/local/opt/vim@7.4/bin:$PATH"
 
-function kfres() kubectl get $1 | grep -ie $2
-function kfp() kfres pod $1
-function kfd() kfres deployment $1
+function kfres() {
+  res=$1; shift
+  name=$1; shift
+  kubectl get $res $@ | grep -ie $name
+}
+function kfp() {
+  name=$1; shift
+  kfres pod $name $@
+}
+function kfd() {
+  name=$1; shift
+  kfres deployment $name $@
+}
+function kef() {
+  pod=`kfp $1 | awk '{print $1}' | head -n 1`
+  shift
+  cmd=$1; shift
+  kubectl exec $@ $pod $cmd
+}
 function kfti() {
   pod=`kfp $1 | awk '{print $1}' | head -n 1`
   keti $pod $2
