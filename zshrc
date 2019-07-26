@@ -45,7 +45,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-extras sublime ruby rails kubernetes docker)
+plugins=(git git-extras sublime ruby rails kubernetes docker osx)
 
 # User configuration
 
@@ -125,7 +125,7 @@ source "$HOME/.local/bin/google-cloud-sdk/completion.zsh.inc"
 export GOPATH="$HOME/golang"
 export PATH=$PATH:$GOPATH/bin
 
-export PATH="$PATH:$HOME/.local/bin"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Kill all running containers.
 alias dockerkillall='docker kill $(docker ps -q)'
@@ -189,3 +189,6 @@ function kafti(){
 }
 alias prettyjson='python -m json.tool'
 source ~/.platform_spesific.zsh
+alias golangpath=$GOPATH/src
+alias logit='vim ~/Documents/logbook/`date +%Y-%m-%d`.md'
+
