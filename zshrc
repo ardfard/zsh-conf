@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -23,10 +23,10 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -45,7 +45,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-extras sublime ruby rails kubernetes docker osx)
+plugins=(git git-extras fzf zsh-autosuggestions)
 
 # User configuration
 
@@ -79,7 +79,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias e="subl -n"
+alias e="vim"
 alias rs=bin/rails
 alias rk=bin/rake
 alias launch-mongo="mongod --config /usr/local/etc/mongod.conf &"
@@ -113,12 +113,6 @@ alias test-app='bin/rspec --fail-fast spec/ -fh > output_rspec.html'
 export PATH=$PATH:/usr/local/sbin
 
 alias rake='noglob rake'
-
-# The next line updates PATH for the Google Cloud SDK.
-source "$HOME/.local/bin/google-cloud-sdk/path.zsh.inc"
-
-# The next line enables shell command completion for gcloud.
-source "$HOME/.local/bin/google-cloud-sdk/completion.zsh.inc"
 
 # golang related
 
@@ -191,4 +185,5 @@ alias prettyjson='python -m json.tool'
 source ~/.platform_spesific.zsh
 alias golangpath=$GOPATH/src
 alias logit='vim ~/Documents/logbook/`date +%Y-%m-%d`.md'
-
+alias vim=nvim
+DEFAULT_USER="ardfard"
