@@ -45,7 +45,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-extras fzf zsh-autosuggestions)
+plugins=(git git-extras fzf zsh-autosuggestions kubernetes)
 
 # User configuration
 
@@ -82,30 +82,6 @@ source $ZSH/oh-my-zsh.sh
 alias e="vim"
 alias rs=bin/rails
 alias rk=bin/rake
-alias launch-mongo="mongod --config /usr/local/etc/mongod.conf &"
-
-# push git repo current branch
-alias push-current="git push origin HEAD"
-
-# cabal aliases
-
-alias ghc-sandbox="ghc -no-user-package-db -package-db .cabal-sandbox/*-packages.conf.d"
-alias ghci-sandbox="ghci -no-user-package-db -package-db .cabal-sandbox/*-packages.conf.d"
-alias runhaskell-sandbox="runhaskell -no-user-package-db -package-db .cabal-sandbox/*-packages.conf.d"
-
-# kubectl aliases
-alias krb='kubectl run bash'
-alias kgp='kubectl get po'
-alias kgd='kubectl get deployment'
-alias kgs='kubectl get service'
-alias kdp='kubectl describe pod'
-alias kds='kubectl describe service'
-alias kdd='kubectl describe deployment'
-alias ke='kubectl exec'
-alias kl='kubectl logs'
-alias klf='kubectl logs -f'
-alias keti='kubectl exec -ti $1 $2'
-alias kati='kubectl attach -ti'
 
 # rspec alias
 alias test-app='bin/rspec --fail-fast spec/ -fh > output_rspec.html'
@@ -115,9 +91,6 @@ export PATH=$PATH:/usr/local/sbin
 alias rake='noglob rake'
 
 # golang related
-
-export GOPATH="$HOME/golang"
-export PATH=$PATH:$GOPATH/bin
 
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -133,9 +106,6 @@ alias dockercleani='printf "\n>>> Deleting untagged images\n\n" && docker rmi $(
 # # Delete all stopped containers and untagged images.
 alias dockerclean='dockercleanc || true && dockercleani'
 
-# Docker shortcuts
-alias dr='docker run'
-
 # Emacs shortcuts
 alias ec='emacsclient -n'
 
@@ -149,41 +119,8 @@ source ~/.local/bin/tmuxinator.zsh
 
 export EDITOR=vim
 
-
-# kubectl completion
-#kubectl completion zsh
-export PATH="/usr/local/opt/vim@7.4/bin:$PATH"
-
-function kfres() {
-  res=$1; shift
-  name=$1; shift
-  kubectl get $res $@ | grep -ie $name
-}
-function kfp() {
-  name=$1; shift
-  kfres pod $name $@
-}
-function kfd() {
-  name=$1; shift
-  kfres deployment $name $@
-}
-function kef() {
-  pod=`kfp $1 | awk '{print $1}' | head -n 1`
-  shift
-  cmd=$1; shift
-  kubectl exec $@ $pod $cmd
-}
-function kfti() {
-  pod=`kfp $1 | awk '{print $1}' | head -n 1`
-  keti $pod $2
-}
-function kafti(){
-  pod=`kfp $1 | awk '{print $1}' | head -n 1`
-  kati $pod
-}
 alias prettyjson='python -m json.tool'
 source ~/.platform_spesific.zsh
-alias golangpath=$GOPATH/src
 alias logit='vim ~/Documents/logbook/`date +%Y-%m-%d`.md'
 alias vim=nvim
 DEFAULT_USER="ardfard"
